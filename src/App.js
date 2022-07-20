@@ -7,12 +7,12 @@ function App() {
         {id: 3, text: 'Comment three'},
     ]
 
+    const loading = false
+    const showCommments = true
 
-    return (
-    <div className='container'>
-        <h1>{title.toUpperCase()}</h1>
-        <p>{body}</p>
-    
+    if(loading) return <h1>Loading...</h1>
+
+    const commentBlock = (        
         <div className="comments">
             <h3>Comments ({comments.length})</h3>
             <ul>
@@ -20,7 +20,14 @@ function App() {
                     <li key={index}>{comment.text}</li>
                 ))}
             </ul>
-        </div>
+        </div>)
+
+    return (
+    <div className='container'>
+        <h1>{title.toUpperCase()}</h1>
+        <p>{body}</p>
+
+        {showCommments && commentBlock}
     
     </div>
     )
