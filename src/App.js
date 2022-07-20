@@ -1,15 +1,18 @@
+import { useState } from 'react'
 import Header from './components/Header'
 import PropTypes from 'prop-types';
-import FeedbackItem from './components/FeedbackItem';
-
+import FeedbackList from './components/FeedbackList';
+import FeedbackData from './data/FeedbackData';
 
 function App() {
+const [feedback, setFeedback] = useState(FeedbackData)
+
     return (
     <>
         {/* pass props into component Header */}
         <Header />
         <div className='container'>
-            <FeedbackItem />
+            <FeedbackList feedback={feedback}/>
         </div>
     </>
     )
