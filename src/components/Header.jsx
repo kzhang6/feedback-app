@@ -1,7 +1,10 @@
 function Header({text}) {
-    
+    const headStyles = {
+        backgroundColor: 'blue', color: 'red'
+    }
+
   return (
-    <header style={{ backgroundColor: 'blue', color: 'red'}}>
+    <header style={headStyles}>
         <div className="container">
             <h2>{text}</h2>
         </div>
