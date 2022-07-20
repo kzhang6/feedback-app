@@ -5,7 +5,7 @@ function App() {
     return (
     <>
         {/* pass props into component Header */}
-        <Header text={3}/>
+        <Header />
         <div className='container'>
             <h1>My App</h1>
         </div>
