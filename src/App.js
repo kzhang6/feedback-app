@@ -12,4 +12,8 @@ function App() {
     )
 }
 
+Header.defaultProps = {
+    text: 'Feedback UI'
+}
+
 export default App
