@@ -1,5 +1,7 @@
 import Header from './components/Header'
 import PropTypes from 'prop-types';
+import FeedbackItem from './components/FeedbackItem';
+
 
 function App() {
     return (
@@ -7,7 +9,7 @@ function App() {
         {/* pass props into component Header */}
         <Header />
         <div className='container'>
-            <h1>My App</h1>
+            <FeedbackItem />
         </div>
     </>
     )
