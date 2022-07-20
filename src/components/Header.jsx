@@ -1,6 +1,6 @@
-function Header({text}) {
+function Header({text, bgColor, textColor}) {
     const headStyles = {
-        backgroundColor: 'blue', color: 'red'
+        backgroundColor: bgColor, color: textColor
     }
 
   return (

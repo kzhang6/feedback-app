@@ -5,7 +5,7 @@ function App() {
     return (
     <>
         {/* pass props into component Header */}
-        <Header />
+        <Header bgColor='red' textColor='blue'/>
         <div className='container'>
             <h1>My App</h1>
         </div>
