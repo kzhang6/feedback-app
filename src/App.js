@@ -3,6 +3,7 @@ import Header from './components/Header'
 import PropTypes from 'prop-types';
 import FeedbackList from './components/FeedbackList';
 import FeedbackData from './data/FeedbackData';
+import FeedbackStats from './components/FeedbackStats';
 
 function App() {
 const [feedback, setFeedback] = useState(FeedbackData)
@@ -18,6 +19,7 @@ const [feedback, setFeedback] = useState(FeedbackData)
         {/* pass props into component Header */}
         <Header />
         <div className='container'>
+            <FeedbackStats feedback={feedback} />
             <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
         </div>
     </>
