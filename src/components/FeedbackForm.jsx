@@ -5,7 +5,7 @@ function FeedbackForm() {
 const[text, setText] = useState('')
 
 const handleTextChange = (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value)  //getting input as typed in (can see in console)
 }
   return (
     <Card>
