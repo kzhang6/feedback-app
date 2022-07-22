@@ -5,7 +5,7 @@ function FeedbackForm() {
 const[text, setText] = useState('')
 
 const handleTextChange = (e) => {
-    console.log(e.target.value)  //getting input as typed in (can see in console)
+    setText(e.target.value)
 }
   return (
     <Card>
@@ -13,7 +13,12 @@ const handleTextChange = (e) => {
         <h2>How ould you rate your service with us?</h2>
         {/* @todo - rating select component */}
         <div className='input-group'>
-            <input onChange={handleTextChange} type='text' placeholder='Write a review' />
+            <input 
+                onChange={handleTextChange} 
+                type='text' 
+                placeholder='Write a review' 
+                value={text}  /* view at components extension */
+            />
             <button type="submit">Send</button>
         </div>
     </form>
