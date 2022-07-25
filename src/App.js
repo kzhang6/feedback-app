@@ -4,11 +4,11 @@ import { useState } from 'react'
 import Header from './components/Header'
 import PropTypes from 'prop-types';
 import FeedbackList from './components/FeedbackList';
-import FeedbackData from './data/FeedbackData';
 import FeedbackStats from './components/FeedbackStats';
 import FeedbackForm from './components/FeedbackForm';
-import AboutPage from './pages/AboutPage'
 import AboutIconLink from './components/AboutIconLink.jsx'
+import AboutPage from './pages/AboutPage'
+import FeedbackData from './data/FeedbackData';
 
 function App() {
 const [feedback, setFeedback] = useState(FeedbackData)
