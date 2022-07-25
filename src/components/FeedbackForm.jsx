@@ -27,10 +27,11 @@ const handleTextChange = (e) => {
 const handleSubmit = (e) => {
     e.preventDefault()
     if (text.trim().length > 10 ){
-        const newFeedback = {
-            text,
+        const newFeedback = {   //construct a new Feedback object
+            text, //shorthand for text: text, which means setting the text field of this object to the text state of this class
             rating,
         }
+        // console.log(newFeedback)
         handleAdd(newFeedback)
 
         setText('')

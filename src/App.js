@@ -11,8 +11,8 @@ function App() {
 const [feedback, setFeedback] = useState(FeedbackData)
 
     const addFeedback = (newFeedback) => {
-        newFeedback.id = uuidv4()
-        console.log(newFeedback)
+        newFeedback.id = uuidv4() //generate a unique ID for each feedback
+        setFeedback([newFeedback,...feedback]) //adding a new feedback to the current array of old feedbacks
     }
 
     const deleteFeedback = (id) => {
