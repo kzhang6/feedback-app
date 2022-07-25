@@ -9,6 +9,7 @@ import FeedbackForm from './components/FeedbackForm';
 import AboutIconLink from './components/AboutIconLink.jsx'
 import AboutPage from './pages/AboutPage'
 import FeedbackData from './data/FeedbackData';
+import {FeedbackProvider} from './Context/FeedbackContext' //FeedbackProvider is not a default export in that component
 
 function App() {
 const [feedback, setFeedback] = useState(FeedbackData)
@@ -25,27 +26,29 @@ const [feedback, setFeedback] = useState(FeedbackData)
     }
 
     return (
-    <Router>
-        {/* pass props into component Header */}
-        <Header />
-        <div className='container'>
-            <Routes>
-                <Route exact path='/' element={
-                    <>
-                    <FeedbackForm handleAdd={addFeedback}/>
-                    <FeedbackStats feedback={feedback} />
-                    <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
-                    </>
-                }> 
+        <FeedbackProvider>
+            <Router>
+                {/* pass props into component Header */}
+                <Header />
+                <div className='container'>
+                    <Routes>
+                        <Route exact path='/' element={
+                            <>
+                            <FeedbackForm handleAdd={addFeedback}/>
+                            <FeedbackStats feedback={feedback} />
+                            <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
+                            </>
+                        }> 
 
-                </Route>
+                        </Route>
 
-                {/* <AboutPage /> */}
-                <Route path='/about' element={<AboutPage />} />
-            </Routes>
-            < AboutIconLink />
-        </div>
-    </Router>
+                        {/* <AboutPage /> */}
+                        <Route path='/about' element={<AboutPage />} />
+                    </Routes>
+                    < AboutIconLink />
+                </div>
+            </Router>
+    </FeedbackProvider>
     )
 }
 
