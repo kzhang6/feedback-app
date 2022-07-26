@@ -1,5 +1,6 @@
 import {v4 as uuidv4} from 'uuid'
 import { createContext, useState } from "react";
+import matchers from '@testing-library/jest-dom/matchers';
 
 const FeedbackContext = createContext()
 
@@ -38,7 +39,12 @@ export const FeedbackProvider = ({children}) => {
         }
     }
 
-    /* set item to be updated */
+    const updateFeedback = (id, updItem) => {
+        /* if the id matchers, then replace the old item with the new updItem  */
+        setFeedback(feedback.map((item) => item.id === id ? {...item, ...updItem} :item))
+    }
+
+    /* when user clicks on the edit button */
     const editFeedback = (item) => {
         setFeedbackEdit({
             item,
@@ -48,10 +54,13 @@ export const FeedbackProvider = ({children}) => {
 
     return <FeedbackContext.Provider value = {{
         feedback, //shorthand for feedback: feedback
+        feedbackEdit, //state that holds the item and the boolean
+
+        /* functions */
         deleteFeedback,
         addFeedback,
         editFeedback, //function
-        feedbackEdit, //state that holds the item and the boolean
+        updateFeedback
     }}>
         {children}
     </FeedbackContext.Provider>
