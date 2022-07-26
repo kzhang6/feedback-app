@@ -1,6 +1,4 @@
-import {v4 as uuidv4} from 'uuid'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import { useState } from 'react'
 import Header from './components/Header'
 import PropTypes from 'prop-types';
 import FeedbackList from './components/FeedbackList';
@@ -8,17 +6,9 @@ import FeedbackStats from './components/FeedbackStats';
 import FeedbackForm from './components/FeedbackForm';
 import AboutIconLink from './components/AboutIconLink.jsx'
 import AboutPage from './pages/AboutPage'
-import FeedbackData from './data/FeedbackData';
 import {FeedbackProvider} from './Context/FeedbackContext' //FeedbackProvider is not a default export in that component
 
 function App() {
-const [feedback, setFeedback] = useState(FeedbackData)
-
-    const addFeedback = (newFeedback) => {
-        newFeedback.id = uuidv4() //generate a unique ID for each feedback
-        setFeedback([newFeedback,...feedback]) //adding a new feedback to the current array of old feedbacks
-    }
-
     return (
         <FeedbackProvider>
             <Router>
@@ -28,7 +18,7 @@ const [feedback, setFeedback] = useState(FeedbackData)
                     <Routes>
                         <Route exact path='/' element={
                             <>
-                            <FeedbackForm handleAdd={addFeedback}/>
+                            <FeedbackForm />
                             <FeedbackStats />
                             <FeedbackList />
                             </>
