@@ -35,7 +35,7 @@ const [feedback, setFeedback] = useState(FeedbackData)
                         <Route exact path='/' element={
                             <>
                             <FeedbackForm handleAdd={addFeedback}/>
-                            <FeedbackStats feedback={feedback} />
+                            <FeedbackStats />
                             <FeedbackList handleDelete={deleteFeedback}/>
                             </>
                         }> 
