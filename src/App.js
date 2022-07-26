@@ -45,7 +45,7 @@ const [feedback, setFeedback] = useState(FeedbackData)
                         {/* <AboutPage /> */}
                         <Route path='/about' element={<AboutPage />} />
                     </Routes>
-                    < AboutIconLink />
+                    <AboutIconLink />
                 </div>
             </Router>
     </FeedbackProvider>
