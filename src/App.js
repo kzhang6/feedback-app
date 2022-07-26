@@ -36,7 +36,7 @@ const [feedback, setFeedback] = useState(FeedbackData)
                             <>
                             <FeedbackForm handleAdd={addFeedback}/>
                             <FeedbackStats feedback={feedback} />
-                            <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
+                            <FeedbackList handleDelete={deleteFeedback}/>
                             </>
                         }> 
 
