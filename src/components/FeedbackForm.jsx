@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Card from './shared/Card'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
@@ -10,7 +10,16 @@ const[rating, setRating] = useState(10)
 const[btnDisabled, setbtnDisabled] = useState(true)
 const[message, setMessage] = useState('')
 
-const{addFeedback} = useContext(FeedbackContext)
+const{addFeedback, feedbackEdit} = useContext(FeedbackContext)
+
+useEffect(() => {
+    // console.log('Hello')
+    if (feedbackEdit.edit === true) { //if user is trying to edit
+        setbtnDisabled(false) //enable send button
+        setText(feedbackEdit.item.text)
+        setRating(feedbackEdit.item.rating)
+    }
+}, [feedbackEdit]) //side effect when clicking on the edit button
 
 const handleTextChange = (e) => {
     if (text === '') {
