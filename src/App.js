@@ -19,12 +19,6 @@ const [feedback, setFeedback] = useState(FeedbackData)
         setFeedback([newFeedback,...feedback]) //adding a new feedback to the current array of old feedbacks
     }
 
-    const deleteFeedback = (id) => {
-        if(window.confirm('Are you sure you want to delete?')){
-            setFeedback(feedback.filter((item) => item.id !== id))
-        }
-    }
-
     return (
         <FeedbackProvider>
             <Router>
@@ -36,7 +30,7 @@ const [feedback, setFeedback] = useState(FeedbackData)
                             <>
                             <FeedbackForm handleAdd={addFeedback}/>
                             <FeedbackStats />
-                            <FeedbackList handleDelete={deleteFeedback}/>
+                            <FeedbackList />
                             </>
                         }> 
 
