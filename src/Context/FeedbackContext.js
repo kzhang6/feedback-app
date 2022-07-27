@@ -1,32 +1,30 @@
 import {v4 as uuidv4} from 'uuid'
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 // import matchers from '@testing-library/jest-dom/matchers';
 
 const FeedbackContext = createContext()
 
 export const FeedbackProvider = ({children}) => {
     const [feedback, setFeedback] = useState([
-        {
-            id: 1,
-            text: 'This is feedback item 1',
-            rating: 10,
-        },
-        {
-            id: 2,
-            text: 'This is feedback item 2',
-            rating:9,
-        },
-        {
-            id: 3,
-            text: 'This is feedback item 3',
-            rating: 7,
-        }
+
     ])
 
     const [feedbackEdit, setFeedbackEdit] = useState({
         item: {},
         edit: false,    //true when clicking on the edit button
     })
+
+    useEffect(() => {
+        fetchFeedback()
+    }, []) //empty dependency: to run only once when the page loads
+
+    const fetchFeedback = async () => {
+        const response = await fetch("http://localhost:3001/feedback?_sort=id&_oder=desc")
+        const data = await response.json()
+
+        // console.log(data);
+        setFeedback(data)
+    }
 
     const addFeedback = (newFeedback) => {
         newFeedback.id = uuidv4() //generate a unique ID for each feedback
