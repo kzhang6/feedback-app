@@ -5,10 +5,8 @@ import { createContext, useState, useEffect } from "react";
 const FeedbackContext = createContext()
 
 export const FeedbackProvider = ({children}) => {
-    const [feedback, setFeedback] = useState([
-
-    ])
-
+    const [isLoading, setIsLoading] = useState(true)    //isLoading default to true
+    const [feedback, setFeedback] = useState([])
     const [feedbackEdit, setFeedbackEdit] = useState({
         item: {},
         edit: false,    //true when clicking on the edit button
@@ -19,11 +17,12 @@ export const FeedbackProvider = ({children}) => {
     }, []) //empty dependency: to run only once when the page loads
 
     const fetchFeedback = async () => {
-        const response = await fetch("http://localhost:3001/feedback?_sort=id&_oder=desc")
+        const response = await fetch("http://localhost:3001/feedback?_sort=id&_oder=desc") //query parameters from the json server
         const data = await response.json()
 
         // console.log(data);
         setFeedback(data)
+        setIsLoading(false)
     }
 
     const addFeedback = (newFeedback) => {
@@ -53,7 +52,7 @@ export const FeedbackProvider = ({children}) => {
     return <FeedbackContext.Provider value = {{
         feedback, //shorthand for feedback: feedback
         feedbackEdit, //state that holds the item and the boolean
-
+        isLoading,
         /* functions */
         deleteFeedback,
         addFeedback,
