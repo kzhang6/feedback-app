@@ -17,7 +17,7 @@ export const FeedbackProvider = ({children}) => {
     }, []) //empty dependency: to run only once when the page loads
 
     const fetchFeedback = async () => {
-        const response = await fetch("http://localhost:3001/feedback?_sort=id&_oder=desc") //query parameters from the json server
+        const response = await fetch("/feedback?_sort=id&_oder=desc") //1. use proxy for domain name in json server 2. query parameters from the json server
         const data = await response.json()
 
         // console.log(data);

@@ -8,7 +8,7 @@ function FeedbackList() {
     /* getting data from FeedbackContext.Provider value rather than passed in as a prop from App.js */
     const {feedback, isLoading} = useContext(FeedbackContext) //
 
-    if (!isLoading && (!feedback || feedback.length === 0)) { //not loading, and no feedback or length is 0
+    if (!isLoading && (!feedback || feedback.length === 0)) { //finished loading, and no feedback or length is 0
         return <p>No Feedback Yet</p>
     }
 
