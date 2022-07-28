@@ -1,4 +1,3 @@
-import {v4 as uuidv4} from 'uuid'
 import { createContext, useState, useEffect } from "react";
 // import matchers from '@testing-library/jest-dom/matchers';
 
@@ -25,9 +24,16 @@ export const FeedbackProvider = ({children}) => {
         setIsLoading(false)
     }
 
-    const addFeedback = (newFeedback) => {
-        newFeedback.id = uuidv4() //generate a unique ID for each feedback
-        setFeedback([newFeedback,...feedback]) //adding a new feedback to the current array of old feedbacks
+    const addFeedback = async (newFeedback) => {
+        const response = await fetch('/feedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newFeedback),
+        })
+        const data = await response.json()
+        setFeedback([data,...feedback]) //adding a new feedback to the current array of old feedbacks
     }
 
     const deleteFeedback = (id) => {
