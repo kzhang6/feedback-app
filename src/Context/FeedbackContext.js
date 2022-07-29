@@ -1,68 +1,47 @@
-import { createContext, useState, useEffect } from "react";
+import {v4 as uuidv4} from 'uuid'
+import { createContext, useState } from "react";
 // import matchers from '@testing-library/jest-dom/matchers';
 
 const FeedbackContext = createContext()
 
 export const FeedbackProvider = ({children}) => {
-    const [isLoading, setIsLoading] = useState(true)    //isLoading default to true
-    const [feedback, setFeedback] = useState([])
+    const [feedback, setFeedback] = useState([
+        {
+            id: 1,
+            text: 'This is feedback item 1',
+            rating: 10,
+        },
+        {
+            id: 2,
+            text: 'This is feedback item 2',
+            rating:9,
+        },
+        {
+            id: 3,
+            text: 'This is feedback item 3',
+            rating: 7,
+        }
+    ])
+
     const [feedbackEdit, setFeedbackEdit] = useState({
         item: {},
         edit: false,    //true when clicking on the edit button
     })
 
-    useEffect(() => {
-        fetchFeedback()
-    }, []) //empty dependency: to run only once when the page loads
-
-    const fetchFeedback = async () => {
-        const response = await fetch("/feedback?_sort=id&_order=desc") //1. use proxy for domain name in json server 2. query parameters from the json server
-        const data = await response.json()
-
-        // console.log(data);
-        setFeedback(data)
-        setIsLoading(false)
+    const addFeedback = (newFeedback) => {
+        newFeedback.id = uuidv4() //generate a unique ID for each feedback
+        setFeedback([newFeedback,...feedback]) //adding a new feedback to the current array of old feedbacks
     }
 
-    const addFeedback = async (newFeedback) => {
-        const response = await fetch('/feedback', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(newFeedback),
-        })
-        const data = await response.json()  //get data from json response
-        setFeedback([data,...feedback]) //adding a new feedback to the current array of old feedbacks
-    }
-
-    const deleteFeedback = async (id) => {
+    const deleteFeedback = (id) => {
         if(window.confirm('Are you sure you want to delete?')){
-            await fetch(`/feedback/${id}`, { method: 'DELETE' })
-
             setFeedback(feedback.filter((item) => item.id !== id))
         }
     }
 
-    const updateFeedback = async (id, updItem) => {
-        const response = await fetch(`/feedback/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body:JSON.stringify(updItem),
-        })
-
-        const data = await response.json()
-        console.log(data)
-
+    const updateFeedback = (id, updItem) => {
         /* if the id matchers, then replace the old item with the new updItem  */
-        setFeedback(feedback.map((item) => (item.id === id ? data : item)))
-
-        setFeedbackEdit({
-            item: {},
-            edit: false,
-          })
+        setFeedback(feedback.map((item) => item.id === id ? {...item, ...updItem} :item))
     }
 
     /* when user clicks on the edit button */
@@ -76,7 +55,7 @@ export const FeedbackProvider = ({children}) => {
     return <FeedbackContext.Provider value = {{
         feedback, //shorthand for feedback: feedback
         feedbackEdit, //state that holds the item and the boolean
-        isLoading,
+
         /* functions */
         deleteFeedback,
         addFeedback,
