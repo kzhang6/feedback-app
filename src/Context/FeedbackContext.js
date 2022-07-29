@@ -42,6 +42,11 @@ export const FeedbackProvider = ({children}) => {
     const updateFeedback = (id, updItem) => {
         /* if the id matchers, then replace the old item with the new updItem  */
         setFeedback(feedback.map((item) => item.id === id ? {...item, ...updItem} :item))
+
+        setFeedbackEdit({
+            item: {},
+            edit: false,
+          })
     }
 
     /* when user clicks on the edit button */
