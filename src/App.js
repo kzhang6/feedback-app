@@ -8,6 +8,8 @@ import AboutIconLink from './components/AboutIconLink.jsx'
 import AboutPage from './pages/AboutPage'
 import {FeedbackProvider} from './Context/FeedbackContext' //FeedbackProvider is not a default export in that component
 
+/* use npm run dev to run both run npm server and npm start together */
+
 function App() {
     return (
         <FeedbackProvider>
