@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import Card from './shared/Card'
 import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
@@ -10,7 +10,17 @@ const[rating, setRating] = useState(10)
 const[btnDisabled, setbtnDisabled] = useState(true)
 const[message, setMessage] = useState('')
 
-const{addFeedback} = useContext(FeedbackContext)
+const{addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext)
+
+// useEffect loads when the page loads
+useEffect(()=> {
+    console.log('Hello')
+    if (feedbackEdit.edit === true) {
+        setbtnDisabled(false)
+        setText(feedbackEdit.item.text)
+        setRating(feedbackEdit.item.rating)
+    }
+}, [feedbackEdit])  //loads once without dependency
 
 const handleTextChange = (e) => {
     if (text === '') {
@@ -35,7 +45,12 @@ const handleSubmit = (e) => {
             rating,
         }
         // console.log(newFeedback)
-        addFeedback(newFeedback)
+
+        if (feedbackEdit.edit === true) {
+            updateFeedback(feedbackEdit.item.id, newFeedback)
+        } else {
+            addFeedback(newFeedback)
+        }
 
         setText('')
     }
